@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="ru-RU">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>YUI-Editable - inline edit using YUI. Demonstration.</title>
+
+<link rel="stylesheet" type="text/css" href="css/reset-fonts-grids.css" />
+<link rel="stylesheet" type="text/css" href="css/base-min.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+<!-- YUI dependencies -->
+<script type="text/javascript" src="../lib/yui/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="../lib/yui/connection-min.js"></script>
+<script type="text/javascript" src="../lib/yui/json-min.js"></script>
+
+<!-- Library files -->
+<script type="text/javascript" src="../lib/js/yui-editable.js"></script>
+<script type="text/javascript" src="../lib/js/yui-editable.text.js"></script>
+<script type="text/javascript" src="../lib/js/yui-editable.textarea.js"></script>
+<script type="text/javascript" src="../lib/js/yui-editable.select.js"></script>
+<script type="text/javascript" src="../lib/js/yui-editable.radio.js"></script>
+<script type="text/javascript" src="../lib/js/yui-editable.checkbox.js"></script>
+
+<script type="text/javascript">
+function init(){
+
+	YAHOO.editable.abstractField.url = 'save.php';
+
+	var elem = YAHOO.util.Dom.get('editable');
+	var text = new YAHOO.editable.text(elem, {fieldName : 'targetName'});
+
+	elem = YAHOO.util.Dom.get('editable_textarea');
+	var textarea = new YAHOO.editable.textarea(elem, {
+			fieldName : 'someField',
+			buttons: {
+				submit: 'Yes',
+				cancel: 'No'
+			}
+	    }
+	);
+
+	elem = YAHOO.util.Dom.get('editable_select');
+	var select = new YAHOO.editable.select(elem,
+	    {
+			fieldName : 'country',
+			options: {
+				en: 'England',
+				fr: 'France',
+				ua: 'Ukraine',
+				gr: 'Greece'
+			},
+			buttons: {
+				submit: 'Ok',
+				cancel: 'Cancel'
+			}
+	    }
+	);
+
+	elem = YAHOO.util.Dom.get('editable_checkbox');
+	var checkbox = new YAHOO.editable.checkbox(elem,
+		{
+			fieldsTag: 'li',
+			fieldsClass: 'opt',
+			fieldName: 'options',
+			values: {
+				1: 'One',
+				2: 'Two',
+				3: 'Three'
+			},
+			buttons: {
+				submit: 'Ok',
+				cancel: 'Cancel'
+			},
+			requestParams: {
+				one: 'txtarea',
+				two: 'cool'
+			},
+			emptyPlaceholder: '------'
+		}
+	);
+
+	elem = YAHOO.util.Dom.get('editable2');
+	var checkbox2 = new YAHOO.editable.checkbox(elem,
+		{
+			url:'save2.php',
+			fieldsTag: 'span',
+			fieldName: 'some_param_name',
+			values: {
+				1: 'Men',
+				2: 'Women',
+				3: 'Girls',
+				4: 'Jongens',
+				5: 'Boys'
+			},
+			buttons: {
+				submit: 'Ok',
+				cancel: 'Cancel'
+			},
+			requestParams: {
+				one: 'chkbox',
+				two: 'cool'
+			},
+			emptyPlaceholder: '-- None of them --'
+		}
+	);
+
+	elem = YAHOO.util.Dom.get('editable_radio');
+	var radio = new YAHOO.editable.radio(elem,
+	    {
+			url:'save.php',
+			fieldName : 'color',
+			options: {
+				1: 'Red',
+				2: 'Green',
+				3: 'Blue',
+				4: 'White'
+			},
+			buttons: {
+				submit: 'Ok',
+				cancel: 'Cancel'
+			},
+			requestParams: {type: 'text'}
+	    }
+	);
+
+	var btn = YAHOO.util.Dom.get('edit');
+	btn.onclick = function(e){
+		checkbox.edit(e);
+		return false;
+	}
+}
+YAHOO.util.Event.onDOMReady(init);
+</script>
+<style type="text/css">
+	#editable2 span {
+		margin: 0 4px;
+	}
+</style>
+</head>
+<body>
+
+	<div id="doc4" class="../lib/js/yui-t6">
+
+		<div id="hd"></div>
+
+		<div id="bd">
+			<h2>Editable text field</h2>
+			<div id="editable">some text here</div>
+
+			<h2>Editable textarea</h2>
+			<div id="editable_textarea">another text here</div>
+
+			<h2>Editable select field</h2>
+			<div id="editable_select">France</div>
+
+			<h2>Editable checkbox</h2>
+			<p>Click this link to edit selection: <a href="#" id="edit">Edit</a>, or doubleclick the list</p>
+			<ul id="editable_checkbox">
+				<li class="opt">One</li>
+				<li class="opt">Two</li>
+			</ul>
+
+			<h2>Editable checkbox 2</h2>
+			<div id="editable2">
+				<span>Men</span><span>Women</span>
+			</div>
+
+			<h2>Editable radio button</h2>
+			<div id="editable_radio">Red</div>
+		</div>
+
+		<div id="ft"></div>
+
+	</div>
+
+</body>
+</html>
