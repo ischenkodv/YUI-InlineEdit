@@ -1,0 +1,12 @@
+YUI InlineEdit
+
+YUI Editable is the set of scripts that allows to edit elements inline on the web page. They do their work by replacing the target text or element with the form used to edit it. Then, after editing is complete it saves the result by sending AJAX request to the server.
+
+The set of scripts contains the following classes:
+
+YAHOO.editable.text
+YAHOO.editable.textarea
+YAHOO.editable.select
+YAHOO.editable.checkbox
+YAHOO.editable.radio
+For example, if the YAHOO.editable.textarea is used for inline editing, the targeted text block will be replaced with the textarea containing the edited text.
